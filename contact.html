@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Life Calculators. Get in touch with us for questions, feedback, or partnership opportunities.">
+    <title>Contact Us - Life Calculators</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .content {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        p {
+            color: #ddd;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-methods {
+            background: #0a0a0a;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .contact-item {
+            margin: 25px 0;
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-value {
+            color: #667eea;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: #333;
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .social-btn:hover {
+            background: #444;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .social-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+
+        <div class="content">
+            <h1>Contact Us</h1>
+            <p>Have questions, feedback, or partnership ideas? We'd love to hear from you!</p>
+
+            <div class="contact-methods">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">contact@lifecalculators.com</div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <div class="contact-label">Business Inquiries</div>
+                    <div class="contact-value">business@lifecalculators.com</div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🐛</div>
+                    <div class="contact-label">Report Issues</div>
+                    <div class="contact-value">support@lifecalculators.com</div>
+                </div>
+            </div>
+
+            <h2 style="color: #ddd; margin: 40px 0 20px; font-size: 1.3rem;">Connect With Us</h2>
+            
+            <div class="social-links">
+                <a href="#" class="social-btn">
+                    <span>📱</span>
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-btn">
+                    <span>🐦</span>
+                    <span>Twitter</span>
+                </a>
+            </div>
+
+            <p style="margin-top: 50px; color: #888; font-size: 1rem;">We typically respond within 24-48 hours.</p>
+        </div>
+    </div>
+</body>
+</html>
