@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate how much money you'll waste over time. Shocking results that will change your spending habits!">
+    <title>Money Waste Calculator - Life Calculators</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .calc-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .calc-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        .calc-form {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            background: #0a0a0a;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .calc-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-container {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-container.show {
+            display: block;
+        }
+
+        .result-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+        }
+
+        .result-text {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .share-btn {
+            padding: 15px 40px;
+            background: #333;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .share-btn:hover {
+            background: #444;
+        }
+
+        .share-btn.copied {
+            background: #10b981;
+        }
+
+        .ad-container {
+            background: #1a1a1a;
+            border: 2px dashed #333;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .calc-form {
+                padding: 25px;
+            }
+
+            .result-amount {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+
+        <div class="calc-header">
+            <div class="calc-icon">💸</div>
+            <h1>Money Waste Calculator</h1>
+            <p class="description">Find out how much you'll waste by a certain age</p>
+        </div>
+
+        <!-- AdSense Ad Slot -->
+        <div class="ad-container">
+            <p style="color: #666;">Advertisement Space</p>
+        </div>
+
+        <div class="calc-form">
+            <form id="moneyForm">
+                <div class="form-group">
+                    <label for="dailySpend">Daily Spending (₹)</label>
+                    <input type="number" id="dailySpend" placeholder="e.g., 200" required min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentAge">Current Age</label>
+                    <input type="number" id="currentAge" placeholder="e.g., 20" required min="1" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="targetAge">Target Age</label>
+                    <input type="number" id="targetAge" placeholder="e.g., 35" required min="1" max="100">
+                </div>
+
+                <button type="submit" class="calc-btn">CALCULATE 🚀</button>
+            </form>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <h2 style="color: #aaa; margin-bottom: 10px;">You will waste</h2>
+            <div class="result-amount" id="resultAmount">₹0</div>
+            <p class="result-text" id="resultText">by age <span id="resultAge">0</span> 😳</p>
+            <button class="share-btn" id="shareBtn">Share Result 📤</button>
+        </div>
+
+        <!-- AdSense Ad Slot -->
+        <div class="ad-container">
+            <p style="color: #666;">Advertisement Space</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('moneyForm');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultAmount = document.getElementById('resultAmount');
+        const resultText = document.getElementById('resultText');
+        const resultAge = document.getElementById('resultAge');
+        const shareBtn = document.getElementById('shareBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const dailySpend = parseFloat(document.getElementById('dailySpend').value);
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const targetAge = parseInt(document.getElementById('targetAge').value);
+
+            if (targetAge <= currentAge) {
+                alert('Target age must be greater than current age!');
+                return;
+            }
+
+            const years = targetAge - currentAge;
+            const totalWaste = dailySpend * 365 * years;
+
+            const formatted = new Intl.NumberFormat('en-IN').format(Math.round(totalWaste));
+            
+            resultAmount.textContent = '₹' + formatted;
+            resultAge.textContent = targetAge;
+            resultContainer.classList.add('show');
+
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        shareBtn.addEventListener('click', function() {
+            const text = `I will waste ${resultAmount.textContent} by age ${resultAge.textContent}! 😳 Calculate yours at Life Calculators`;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                shareBtn.textContent = 'Copied! ✓';
+                shareBtn.classList.add('copied');
+                
+                setTimeout(function() {
+                    shareBtn.textContent = 'Share Result 📤';
+                    shareBtn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
