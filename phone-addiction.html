@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test your phone addiction level. Are you normal, addicted, or in the danger zone?">
+    <title>Phone Addiction Test - Life Calculators</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .calc-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .calc-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        .calc-form {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            background: #0a0a0a;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00f2fe;
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
+        }
+
+        .calc-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-container {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-container.show {
+            display: block;
+        }
+
+        .result-level {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .normal {
+            color: #10b981;
+        }
+
+        .addicted {
+            color: #f59e0b;
+        }
+
+        .danger {
+            color: #ef4444;
+        }
+
+        .result-text {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .result-advice {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .share-btn {
+            padding: 15px 40px;
+            background: #333;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .share-btn:hover {
+            background: #444;
+        }
+
+        .share-btn.copied {
+            background: #10b981;
+        }
+
+        .ad-container {
+            background: #1a1a1a;
+            border: 2px dashed #333;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .calc-form {
+                padding: 25px;
+            }
+
+            .result-level {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+
+        <div class="calc-header">
+            <div class="calc-icon">📱</div>
+            <h1>Phone Addiction Test</h1>
+            <p class="description">Check your addiction level right now</p>
+        </div>
+
+        <!-- AdSense Ad Slot -->
+        <div class="ad-container">
+            <p style="color: #666;">Advertisement Space</p>
+        </div>
+
+        <div class="calc-form">
+            <form id="addictionForm">
+                <div class="form-group">
+                    <label for="screenTime">Daily Screen Time (hours)</label>
+                    <input type="number" id="screenTime" placeholder="e.g., 6" required min="0" max="24" step="0.5">
+                </div>
+
+                <button type="submit" class="calc-btn">CHECK LEVEL 🔍</button>
+            </form>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <h2 style="color: #aaa; margin-bottom: 10px;">Your Level:</h2>
+            <div class="result-level" id="resultLevel">NORMAL</div>
+            <p class="result-text" id="resultEmoji">✅</p>
+            <p class="result-advice" id="resultAdvice"></p>
+            <button class="share-btn" id="shareBtn">Share Result 📤</button>
+        </div>
+
+        <!-- AdSense Ad Slot -->
+        <div class="ad-container">
+            <p style="color: #666;">Advertisement Space</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('addictionForm');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultLevel = document.getElementById('resultLevel');
+        const resultEmoji = document.getElementById('resultEmoji');
+        const resultAdvice = document.getElementById('resultAdvice');
+        const shareBtn = document.getElementById('shareBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const screenTime = parseFloat(document.getElementById('screenTime').value);
+            
+            let level, emoji, advice, className;
+
+            if (screenTime < 4) {
+                level = 'NORMAL';
+                emoji = '✅';
+                advice = 'Great job! You have a healthy relationship with your phone. Keep it up!';
+                className = 'normal';
+            } else if (screenTime >= 4 && screenTime < 8) {
+                level = 'ADDICTED';
+                emoji = '⚠️';
+                advice = 'Warning! You\'re spending too much time on your phone. Try setting daily limits and taking regular breaks.';
+                className = 'addicted';
+            } else {
+                level = 'DANGER ZONE';
+                emoji = '🚨';
+                advice = 'ALERT! Your phone usage is extremely high. This can seriously impact your mental health, productivity, and relationships. Consider seeking help or using app blockers.';
+                className = 'danger';
+            }
+
+            resultLevel.textContent = level;
+            resultLevel.className = 'result-level ' + className;
+            resultEmoji.textContent = emoji;
+            resultAdvice.textContent = advice;
+            
+            resultContainer.classList.add('show');
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        shareBtn.addEventListener('click', function() {
+            const text = `My phone addiction level: ${resultLevel.textContent} ${resultEmoji.textContent} Check yours at Life Calculators!`;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                shareBtn.textContent = 'Copied! ✓';
+                shareBtn.classList.add('copied');
+                
+                setTimeout(function() {
+                    shareBtn.textContent = 'Share Result 📤';
+                    shareBtn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
