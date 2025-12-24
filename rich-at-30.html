@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate how rich you'll be at 30 based on your savings and investment growth. Plan your financial future!">
+    <title>Rich at 30 Calculator - Life Calculators</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .calc-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .calc-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        .calc-form {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            background: #0a0a0a;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #fcb69f;
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: none;
+            border-radius: 12px;
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(252, 182, 159, 0.4);
+        }
+
+        .calc-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-container {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-container.show {
+            display: block;
+        }
+
+        .result-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+        }
+
+        .result-text {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ddd;
+        }
+
+        .result-emoji {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        .result-details {
+            background: #0a0a0a;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0 30px;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+
+        .detail-row span:last-child {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .share-btn {
+            padding: 15px 40px;
+            background: #333;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .share-btn:hover {
+            background: #444;
+        }
+
+        .share-btn.copied {
+            background: #10b981;
+        }
+
+        .ad-container {
+            background: #1a1a1a;
+            border: 2px dashed #333;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .calc-form {
+                padding: 25px;
+            }
+
+            .result-amount {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+
+        <div class="calc-header">
+            <div class="calc-icon">💰</div>
+            <h1>Rich at 30 Calculator</h1>
+            <p class="description">Find out how rich you'll be at 30</p>
+        </div>
+
+        <!-- AdSense Ad Slot -->
+        <div class="ad-container">
+            <p style="color: #666;">Advertisement Space</p>
+        </div>
+
+        <div class="calc-form">
+            <form id="richForm">
+                <div class="form-group">
+                    <label for="monthlySavings">Monthly Savings (₹)</label>
+                    <input type="number" id="monthlySavings" placeholder="e.g., 5000" required min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentAge">Current Age</label>
+                    <input type="number" id="currentAge" placeholder="e.g., 20" required min="1" max="29">
+                </div>
+
+                <div class="form-group">
+                    <label for="annualGrowth">Expected Annual Growth (%)</label>
+                    <input type="number" id="annualGrowth" placeholder="e.g., 12" required min="0" max="100" step="0.1">
+                </div>
+
+                <button type="submit" class="calc-btn">CALCULATE 💵</button>
+            </form>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <h2 style="color: #aaa; margin-bottom: 10px;">At age 30, you'll have:</h2>
+            <div class="result-amount" id="resultAmount">₹0</div>
+            <div class="result-emoji" id="resultEmoji">💎</div>
+            <p class="result-text" id="resultMessage"></p>
+            
+            <div class="result-details">
+                <div class="detail-row">
+                    <span>Total Invested:</span>
+                    <span id="totalInvested">₹0</span>
+                </div>
+                <div class="detail-row">
+                    <span>Growth Earned:</span>
+                    <span id="growthEarned">₹0</span>
+                </div>
+            </div>
+
+            <button class="share-btn" id="shareBtn">Share Result 📤</button>
+        </div>
+
+        <!-- AdSense Ad Slot -->
+        <div class="ad-container">
+            <p style="color: #666;">Advertisement Space</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('richForm');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultAmount = document.getElementById('resultAmount');
+        const resultEmoji = document.getElementById('resultEmoji');
+        const resultMessage = document.getElementById('resultMessage');
+        const totalInvested = document.getElementById('totalInvested');
+        const growthEarned = document.getElementById('growthEarned');
+        const shareBtn = document.getElementById('shareBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const monthlySavings = parseFloat(document.getElementById('monthlySavings').value);
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const annualGrowth = parseFloat(document.getElementById('annualGrowth').value) / 100;
+
+            if (currentAge >= 30) {
+                alert('Current age must be less than 30!');
+                return;
+            }
+
+            const years = 30 - currentAge;
+            const months = years * 12;
+            const monthlyRate = annualGrowth / 12;
+
+            // Future value of annuity formula
+            let futureValue;
+            if (monthlyRate === 0) {
+                futureValue = monthlySavings * months;
+            } else {
+                futureValue = monthlySavings * (Math.pow(1 + monthlyRate, months) - 1) / monthlyRate;
+            }
+
+            const totalInvestedAmount = monthlySavings * months;
+            const growthEarnedAmount = futureValue - totalInvestedAmount;
+
+            const formatted = new Intl.NumberFormat('en-IN').format(Math.round(futureValue));
+            const investedFormatted = new Intl.NumberFormat('en-IN').format(Math.round(totalInvestedAmount));
+            const growthFormatted = new Intl.NumberFormat('en-IN').format(Math.round(growthEarnedAmount));
+
+            resultAmount.textContent = '₹' + formatted;
+            totalInvested.textContent = '₹' + investedFormatted;
+            growthEarned.textContent = '₹' + growthFormatted;
+
+            let emoji, message;
+            const lakhValue = futureValue / 100000;
+
+            if (lakhValue < 5) {
+                emoji = '🌱';
+                message = 'Good start! Keep increasing your savings to build wealth faster.';
+            } else if (lakhValue < 10) {
+                emoji = '🚀';
+                message = 'Great job! You\'re on track to build solid wealth by 30!';
+            } else if (lakhValue < 20) {
+                emoji = '💎';
+                message = 'Excellent! You\'re building serious wealth. Stay consistent!';
+            } else {
+                emoji = '👑';
+                message = 'AMAZING! You\'re going to be very wealthy at 30. Keep it up!';
+            }
+
+            resultEmoji.textContent = emoji;
+            resultMessage.textContent = message;
+            
+            resultContainer.classList.add('show');
+            resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        shareBtn.addEventListener('click', function() {
+            const text = `I'll have ${resultAmount.textContent} by age 30! ${resultEmoji.textContent} Calculate yours at Life Calculators`;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                shareBtn.textContent = 'Copied! ✓';
+                shareBtn.classList.add('copied');
+                
+                setTimeout(function() {
+                    shareBtn.textContent = 'Share Result 📤';
+                    shareBtn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
